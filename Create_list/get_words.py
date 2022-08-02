@@ -9,7 +9,7 @@ from nltk.stem.snowball import DanishStemmer
 #%% Download files from github containing sentences
 github_link = "https://raw.githubusercontent.com/common-voice/common-voice/main/server/data/da/"
 files = ["europarl-v7-da.txt", "sentence-collector.txt", "singleword-benchmark.txt"]
-filename = "Data/sentences.txt"
+filename = "sentences.txt"
 
 for file in files:
     r = requests.get(github_link + file)
@@ -25,18 +25,18 @@ with open(filename, "r") as file:
 
 #%% Get word list from DSN
 RO_link = "https://dsn.dk/wp-content/uploads/2021/03/RO2012.opslagsord.med_.homnr_.og_.ordklasse.zip"
-RO_filename = "Data/da_words"
+RO_filename = "da_words"
 r = requests.get(RO_link)
 with open(RO_filename + ".zip", 'wb') as outfile:
     outfile.write(r.content)
 
 with zipfile.ZipFile(RO_filename + ".zip","r") as zip_ref:
-    zip_ref.extractall("Data")
+    zip_ref.extractall()
 
-words = pd.read_csv("Data/RO2012.opslagsord.med.homnr.og.ordklasse.txt", delimiter=';', header=None).drop(columns=[1])
+words = pd.read_csv("RO2012.opslagsord.med.homnr.og.ordklasse.txt", delimiter=';', header=None).drop(columns=[1])
 words = np.unique(np.array([x.split(' ')[-1] for x in words[0]]))
 
-pd.DataFrame(words).to_csv("Data/da_words.csv",header=None, index=None)
+pd.DataFrame(words).to_csv("da_words.csv",header=None, index=None)
 
 #%% Find words not yet used
 words_used = np.unique(' '.join(sentences).translate(str.maketrans('', '', string.punctuation + '»«')).replace('– ', '').replace('— ', '').replace('\xad', '').lower().split(' '))
@@ -48,4 +48,4 @@ words_stemmed = np.unique([stemmer.stem(x) for x in words])
 unused_words = list(set(words) - set(words_used_stemmed)- set(words_used))
 unused_words.sort()
 
-pd.DataFrame(unused_words).to_csv("Data/da_unused_words.csv",header=None, index=None)
+pd.DataFrame(unused_words).to_csv("da_unused_words.csv",header=None, index=None)
