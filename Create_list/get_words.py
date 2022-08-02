@@ -36,8 +36,6 @@ with zipfile.ZipFile(RO_filename + ".zip","r") as zip_ref:
 words = pd.read_csv("RO2012.opslagsord.med.homnr.og.ordklasse.txt", delimiter=';', header=None).drop(columns=[1])
 words = np.unique(np.array([x.split(' ')[-1] for x in words[0]]))
 
-pd.DataFrame(words).to_csv("da_words.csv",header=None, index=None)
-
 #%% Find words not yet used
 words_used = np.unique(' '.join(sentences).translate(str.maketrans('', '', string.punctuation + '»«')).replace('– ', '').replace('— ', '').replace('\xad', '').lower().split(' '))
 
@@ -48,4 +46,4 @@ words_stemmed = np.unique([stemmer.stem(x) for x in words])
 unused_words = list(set(words) - set(words_used_stemmed)- set(words_used))
 unused_words.sort()
 
-pd.DataFrame(unused_words).to_csv("da_unused_words.csv",header=None, index=None)
+pd.DataFrame(unused_words).to_csv("../da_unused_words.csv",header=None, index=None)

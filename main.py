@@ -17,7 +17,16 @@ app = FastAPI()
 async def root():
     sampled_words = sample(unused_words, 10)
     url_words = [f'<a href="{"https://ordnet.dk/ddo/ordbog?query=" + x}">{x}</a>' for x in sampled_words]
-    return_str = "Disse ord optræder ikke i Common Voice sætninger på dansk - kan du finde på nogen? <br>" + '<br>'.join(url_words)
+    return_str = f"""
+    <html>
+        <head>
+            <title>Dansk Common Voice sætnings-inspiration</title>
+        </head>
+        <body>
+            Disse ord optræder ikke i Common Voice sætninger på dansk - kan du finde på nogen? Du kan indtaste dine sætninger <a href=https://commonvoice.mozilla.org/sentence-collector/#/en/add>her</a><br>{'<br>'.join(url_words)}
+        </body>
+    </html>
+    """
     return return_str
 
 if __name__ == '__main__':
