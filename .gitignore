@@ -1,8 +1,8 @@
 # Data files
-Create_list/da_words.csv
-Create_list/da_words.zip
-Create_list/RO2012.opslagsord.med.homnr.og.ordklasse.txt
-Create_list/sentences.txt
+da_words.csv
+da_words.zip
+RO2012.opslagsord.med.homnr.og.ordklasse.txt
+sentences.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

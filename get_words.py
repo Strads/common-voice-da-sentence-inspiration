@@ -46,4 +46,4 @@ words_stemmed = np.unique([stemmer.stem(x) for x in words])
 unused_words = list(set(words) - set(words_used_stemmed)- set(words_used))
 unused_words.sort()
 
-pd.DataFrame(unused_words).to_csv("../da_unused_words.csv",header=None, index=None)
+pd.DataFrame(unused_words).to_csv("da_unused_words.csv",header=None, index=None)
