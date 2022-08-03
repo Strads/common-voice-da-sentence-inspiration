@@ -1,3 +1,8 @@
 fastapi
 uvicorn
 gunicorn
+nltk
+numpy
+pandas
+zipfile
+requests
