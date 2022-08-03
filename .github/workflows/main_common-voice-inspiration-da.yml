@@ -35,7 +35,7 @@ jobs:
         
       - name: Create list of unused words
         run: |
-          python Create_list/get_words.py
+          python get_words.py
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v2
