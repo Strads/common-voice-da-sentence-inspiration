@@ -4,5 +4,4 @@ gunicorn
 nltk
 numpy
 pandas
-zipfile
 requests
